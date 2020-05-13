@@ -9,13 +9,13 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-# RootModule = ''
+RootModule = 'PSFalcon.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.3.9'
+ModuleVersion = '2.0.0'
 
 # Supported PSEditions
-# CompatiblePSEditions = @()
+CompatiblePSEditions = @('Desktop','Core')
 
 # ID used to uniquely identify this module
 GUID = 'bb6f8c89-6c67-4510-bb86-9dcae8ee5769'
@@ -66,421 +66,37 @@ PowerShellVersion = '5.1'
 # FormatsToProcess = @()
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-NestedModules = @(
-    # cloud-connect-aws
-    '.\cloud-connect-aws\Add-CsAwsSettings.psm1',
-    '.\cloud-connect-aws\Edit-CsAwsAccount.psm1',
-    '.\cloud-connect-aws\Get-CsAwsAccess.psm1',
-    '.\cloud-connect-aws\Get-CsAwsAccountId.psm1',
-    '.\cloud-connect-aws\Get-CsAwsAccountInfo.psm1',
-    '.\cloud-connect-aws\Get-CsAwsSettings.psm1',
-    '.\cloud-connect-aws\New-CsAwsAccount.psm1',
-    '.\cloud-connect-aws\Remove-CsAwsAccount.psm1',
-
-    # detects
-    '.\detects\Edit-CsDetect.psm1',
-    '.\detects\Get-CsDetectId.psm1',
-    '.\detects\Get-CsDetectInfo.psm1',
-
-    # device-control-policies
-    '.\device-control-policies\Add-CsControlGroup.psm1',
-    '.\device-control-policies\Disable-CsControlPolicy.psm1',
-    '.\device-control-policies\Edit-CsControlPolicy.psm1',
-    '.\device-control-policies\Enable-CsControlPolicy.psm1',
-    '.\device-control-policies\Get-CsControlMemberId.psm1',
-    '.\device-control-policies\Get-CsControlMemberInfo.psm1',
-    '.\device-control-policies\Get-CsControlPolicyId.psm1',
-    '.\device-control-policies\Get-CsControlPolicyInfo.psm1',
-    '.\device-control-policies\New-CsControlPolicy.psm1',
-    '.\device-control-policies\Remove-CsControlGroup.psm1',
-    '.\device-control-policies\Remove-CsControlPolicy.psm1',
-    '.\device-control-policies\Set-CsControlPrecedence.psm1',
-
-    # falconx-sandbox
-    '.\falconx-sandbox\Get-CsAnalysisId.psm1',
-    '.\falconx-sandbox\Get-CsAnalysisInfo.psm1',
-    '.\falconx-sandbox\Get-CsSubmissionId.psm1',
-    '.\falconx-sandbox\Get-CsSubmissionInfo.psm1',
-    '.\falconx-sandbox\Get-CsSubmissionQuota.psm1',
-    '.\falconx-sandbox\New-CsSample.psm1',
-    '.\falconx-sandbox\Receive-CsArtifact.psm1',
-    '.\falconx-sandbox\Submit-CsSample.psm1',
-
-    # firewall-management
-    '.\firewall-management\Edit-CsFirewallPolicySettings.psm1',
-    '.\firewall-management\Edit-CsFirewallRuleGroup.psm1',
-    '.\firewall-management\Get-CsFirewallEventId.psm1',
-    '.\firewall-management\Get-CsFirewallEventInfo.psm1',
-    '.\firewall-management\Get-CsFirewallFieldId.psm1',
-    '.\firewall-management\Get-CsFirewallFieldInfo.psm1',
-    '.\firewall-management\Get-CsFirewallPlatformId.psm1',
-    '.\firewall-management\Get-CsFirewallPlatformInfo.psm1',
-    '.\firewall-management\Get-CsFirewallPolicySettings.psm1',
-    '.\firewall-management\Get-CsFirewallRuleGroupId.psm1',
-    '.\firewall-management\Get-CsFirewallRuleGroupInfo.psm1',
-    '.\firewall-management\Get-CsFirewallRuleId.psm1',
-    '.\firewall-management\Get-CsFirewallRuleInfo.psm1',
-    '.\firewall-management\New-CsFirewallRuleGroup.psm1',
-    '.\firewall-management\Remove-CsFirewallRuleGroup.psm1',
-
-    # firewall-policies
-    '.\firewall-policies\Add-CsFirewallGroup.psm1',
-    '.\firewall-policies\Disable-CsFirewallPolicy.psm1',
-    '.\firewall-policies\Edit-CsFirewallPolicy.psm1',
-    '.\firewall-policies\Enable-CsFirewallPolicy.psm1',
-    '.\firewall-policies\Get-CsFirewallMemberId.psm1',
-    '.\firewall-policies\Get-CsFirewallMemberInfo.psm1',
-    '.\firewall-policies\Get-CsFirewallPolicyId.psm1',
-    '.\firewall-policies\Get-CsFirewallPolicyInfo.psm1',
-    '.\firewall-policies\New-CsFirewallPolicy.psm1',
-    '.\firewall-policies\Remove-CsFirewallGroup.psm1',
-    '.\firewall-policies\Remove-CsFirewallPolicy.psm1',
-    '.\firewall-policies\Set-CsFirewallPrecedence.psm1',
-
-    # host-group
-    '.\host-group\Add-CsGroupMember.psm1',
-    '.\host-group\Edit-CsGroup.psm1',
-    '.\host-group\Get-CsGroupId.psm1',
-    '.\host-group\Get-CsGroupInfo.psm1',
-    '.\host-group\Get-CsGroupMemberId.psm1',
-    '.\host-group\Get-CsGroupMemberInfo.psm1',
-    '.\host-group\New-CsGroup.psm1',
-    '.\host-group\Remove-CsGroup.psm1',
-    '.\host-group\Remove-CsGroupMember.psm1',
-
-    # hosts
-    '.\hosts\Get-CsHostId.psm1',
-    '.\hosts\Get-CsHostInfo.psm1',
-    '.\hosts\Hide-CsHost.psm1',
-    '.\hosts\Show-CsHost.psm1',
-    '.\hosts\Start-CsContain.psm1',
-    '.\hosts\Stop-CsContain.psm1',
-
-    # incidents
-    '.\incidents\Edit-CsIncident.psm1',
-    '.\incidents\Get-CsBehaviorId.psm1',
-    '.\incidents\Get-CsBehaviorInfo.psm1',
-    '.\incidents\Get-CsIncidentId.psm1',
-    '.\incidents\Get-CsIncidentInfo.psm1',
-    '.\incidents\Get-CsScore.psm1',
-
-    # intel
-    '.\intel\Get-CsActorId.psm1',
-    '.\intel\Get-CsActorInfo.psm1',
-    '.\intel\Get-CsIndicatorId.psm1',
-    '.\intel\Get-CsIndicatorInfo.psm1',
-    '.\intel\Get-CsReportId.psm1',
-    '.\intel\Get-CsReportInfo.psm1',
-    '.\intel\Get-CsRuleId.psm1',
-    '.\intel\Get-CsRuleInfo.psm1',
-    '.\intel\Receive-CsReport.psm1',
-    '.\intel\Receive-CsRuleSet.psm1',
-
-    # iocs
-    '.\iocs\Edit-CsIoc.psm1',
-    '.\iocs\Get-CsIoc.psm1',
-    '.\iocs\Get-CsIocHostId.psm1',
-    '.\iocs\Get-CsIocInfo.psm1',
-    '.\iocs\Get-CsIocProcessId.psm1',
-    '.\iocs\Get-CsIocProcessInfo.psm1',
-    '.\iocs\New-CsIoc.psm1',
-    '.\iocs\Remove-CsIoc.psm1',
-
-    # oauth2
-    '.\oauth2\Get-CsToken.psm1',
-
-    # malquery
-    '.\malquery\Get-CsMalQueryQuota.psm1',
-    '.\malquery\Get-CsMalQueryRequestInfo.psm1',
-    '.\malquery\Get-CsMalQuerySampleInfo.psm1',
-    '.\malquery\New-CsMalQueryArchive.psm1',
-    '.\malquery\New-CsMalQueryHunt.psm1',
-    '.\malquery\New-CsMalQuerySearch.psm1',
-    '.\malquery\Receive-CsMalQueryArchive.psm1',
-    '.\malquery\Receive-CsMalQuerySample.psm1',
-
-    # prevention-policies
-    '.\prevention-policies\Add-CsPreventGroup.psm1',
-    '.\prevention-policies\Disable-CsPreventPolicy.psm1',
-    '.\prevention-policies\Edit-CsPreventPolicy.psm1',
-    '.\prevention-policies\Enable-CsPreventPolicy.psm1',
-    '.\prevention-policies\Get-CsPreventMemberId.psm1',
-    '.\prevention-policies\Get-CsPreventMemberInfo.psm1',
-    '.\prevention-policies\Get-CsPreventPolicyId.psm1',
-    '.\prevention-policies\Get-CsPreventPolicyInfo.psm1',
-    '.\prevention-policies\New-CsPreventPolicy.psm1',
-    '.\prevention-policies\Remove-CsPreventGroup.psm1',
-    '.\prevention-policies\Remove-CsPreventPolicy.psm1',
-    '.\prevention-policies\Set-CsPreventPrecedence.psm1',
-
-    # real-time-response
-    '.\real-time-response\Confirm-RtrBatch.psm1',
-    '.\real-time-response\Confirm-RtrGet.psm1',
-    '.\real-time-response\Get-RtrFileId.psm1',
-    '.\real-time-response\Get-RtrFileInfo.psm1',
-    '.\real-time-response\Get-RtrScriptId.psm1',
-    '.\real-time-response\Get-RtrScriptInfo.psm1',
-    '.\real-time-response\New-RtrFile.psm1',
-    '.\real-time-response\New-RtrScript.psm1',
-    '.\real-time-response\Receive-RtrGet.psm1',
-    '.\real-time-response\Remove-RtrFile.psm1',
-    '.\real-time-response\Remove-RtrScript.psm1',
-    '.\real-time-response\Send-RtrCommand.psm1',
-    '.\real-time-response\Send-RtrGet.psm1',
-    '.\real-time-response\Start-RtrBatch.psm1',
-
-    # sensor-download
-    '.\sensor-download\Get-CsCCID.psm1',
-    '.\sensor-download\Get-CsInstallerId.psm1',
-    '.\sensor-download\Get-CsInstallerInfo.psm1',
-    '.\sensor-download\Receive-CsInstaller.psm1',
-
-    # sensor-update-policies
-    '.\sensor-update-policies\Add-CsSensorGroup.psm1',
-    '.\sensor-update-policies\Disable-CsSensorPolicy.psm1',
-    '.\sensor-update-policies\Edit-CsSensorPolicy.psm1',
-    '.\sensor-update-policies\Enable-CsSensorPolicy.psm1',
-    '.\sensor-update-policies\Get-CsSensorBuild.psm1',
-    '.\sensor-update-policies\Get-CsSensorMemberId.psm1',
-    '.\sensor-update-policies\Get-CsSensorMemberInfo.psm1',
-    '.\sensor-update-policies\Get-CsSensorPolicyId.psm1',
-    '.\sensor-update-policies\Get-CsSensorPolicyInfo.psm1',
-    '.\sensor-update-policies\Get-CsUninstallToken.psm1',
-    '.\sensor-update-policies\New-CsSensorPolicy.psm1',
-    '.\sensor-update-policies\Remove-CsSensorGroup.psm1',
-    '.\sensor-update-policies\Remove-CsSensorPolicy.psm1',
-    '.\sensor-update-policies\Set-CsSensorPrecedence.psm1',
-
-    # spotlight-vulnerabilities
-    '.\spotlight-vulnerabilities\Get-CsVulnId.psm1',
-    '.\spotlight-vulnerabilities\Get-CsVulnInfo.psm1',
-
-    # tools
-    '.\tools\Convert-RtrResult.psm1',
-    '.\tools\Invoke-CsAPI.psm1',
-    '.\tools\Join-CsResult.psm1',
-    '.\tools\Split-CsArray.psm1',
-
-    # user-management
-    '.\user-management\Add-CsUser.psm1',
-    '.\user-management\Add-CsUserRole.psm1',
-    '.\user-management\Edit-CsUser.psm1',
-    '.\user-management\Get-CsRole.psm1',
-    '.\user-management\Get-CsUserId.psm1',
-    '.\user-management\Get-CsUserInfo.psm1',
-    '.\user-management\Get-CsUsername.psm1',
-    '.\user-management\Get-CsUserRole.psm1',
-    '.\user-management\Remove-CsUser.psm1',
-    '.\user-management\Remove-CsUserRole.psm1'
-)
+# NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
-    # cloud-connect-aws
-    'Add-CsAwsSettings',
-    'Edit-CsAwsAccount',
-    'Get-CsAwsAccess',
-    'Get-CsAwsAccountId',
-    'Get-CsAwsAccountInfo',
-    'Get-CsAwsSettings',
-    'New-CsAwsAccount',
-    'Remove-CsAwsAccount',
-
     # detects
-    'Edit-CsDetect',
-    'Get-CsDetectId',
-    'Get-CsDetectInfo',
-
-    # device-control-policies
-    'Add-CsControlGroup',
-    'Disable-CsControlPolicy',
-    'Edit-CsControlPolicy',
-    'Enable-CsControlPolicy',
-    'Get-CsControlMemberId',
-    'Get-CsControlMemberInfo',
-    'Get-CsControlPolicyId',
-    'Get-CsControlPolicyInfo',
-    'New-CsControlPolicy',
-    'Remove-CsControlGroup',
-    'Remove-CsControlPolicy',
-    'Set-CsControlPrecedence',
-
-    # falconx-sandbox
-    'Get-CsAnalysisId',
-    'Get-CsAnalysisInfo',
-    'Get-CsSubmissionId',
-    'Get-CsSubmissionInfo',
-    'Get-CsSubmissionQuota',
-    'New-CsSample',
-    'Receive-CsArtifact',
-    'Submit-CsSample',
-
-    # firewall-management
-    'Edit-CsFirewallPolicySettings',
-    'Edit-CsFirewallRuleGroup',
-    'Get-CsFirewallEventId',
-    'Get-CsFirewallEventInfo',
-    'Get-CsFirewallFieldId',
-    'Get-CsFirewallFieldInfo',
-    'Get-CsFirewallPlatformId',
-    'Get-CsFirewallPlatformInfo',
-    'Get-CsFirewallPolicySettings',
-    'Get-CsFirewallRuleGroupId',
-    'Get-CsFirewallRuleGroupInfo',
-    'Get-CsFirewallRuleId',
-    'Get-CsFirewallRuleInfo',
-    'New-CsFirewallRuleGroup',
-    'Remove-CsFirewallRuleGroup',
-
-    # firewall-policies
-    'Add-CsFirewallGroup',
-    'Disable-CsFirewallPolicy',
-    'Edit-CsFirewallPolicy',
-    'Enable-CsFirewallPolicy',
-    'Get-CsFirewallMemberId',
-    'Get-CsFirewallMemberInfo',
-    'Get-CsFirewallPolicyId',
-    'Get-CsFirewallPolicyInfo',
-    'New-CsFirewallPolicy',
-    'Remove-CsFirewallGroup',
-    'Remove-CsFirewallPolicy',
-    'Set-CsFirewallPrecedence',
+    'Edit-Detection',
+    'Get-Detection',
 
     # host-group
-    'Add-CsGroupMember',
-    'Edit-CsGroup',
-    'Get-CsGroupId',
-    'Get-CsGroupInfo',
-    'Get-CsGroupMemberId',
-    'Get-CsGroupMemberInfo',
-    'New-CsGroup',
-    'Remove-CsGroup',
-    'Remove-CsGroupMember',
+    'Edit-Group',
+    'Get-Group',
+    'New-Group',
+    'Remove-Group',
+    'Submit-GroupAction',
 
     # hosts
-    'Get-CsHostId',
-    'Get-CsHostInfo',
-    'Hide-CsHost',
-    'Show-CsHost',
-    'Start-CsContain',
-    'Stop-CsContain',
+    'Get-Host',
+    'Submit-HostAction',
 
     # incidents
-    'Edit-CsIncident',
-    'Get-CsBehaviorId',
-    'Get-CsBehaviorInfo',
-    'Get-CsIncidentId',
-    'Get-CsIncidentInfo',
-    'Get-CsScore',
-
-    # intel
-    'Get-CsActorId',
-    'Get-CsActorInfo',
-    'Get-CsIndicatorId',
-    'Get-CsIndicatorInfo',
-    'Get-CsReportId',
-    'Get-CsReportInfo',
-    'Get-CsRuleId',
-    'Get-CsRuleInfo',
-    'Receive-CsReport',
-    'Receive-CsRuleSet',
-
-    # iocs
-    'Edit-CsIoc',
-    'Get-CsIoc',
-    'Get-CsIocHostId',
-    'Get-CsIocInfo',
-    'Get-CsIocProcessId',
-    'Get-CsIocProcessInfo',
-    'New-CsIoc',
-    'Remove-CsIoc',
+    'Get-Behavior',
+    'Get-Incident',
+    'Get-Score',
+    'Submit-IncidentAction',
 
     # oauth2
-    'Get-CsToken',
-
-    # malquery
-    'Get-CsMalQueryQuota',
-    'Get-CsMalQueryRequestInfo',
-    'Get-CsMalQuerySampleInfo',
-    'New-CsMalQueryArchive',
-    'New-CsMalQueryHunt',
-    'New-CsMalQuerySearch',
-    'Receive-CsMalQueryArchive',
-    'Receive-CsMalQuerySample',
-
-    # prevention-policies
-    'Add-CsPreventGroup',
-    'Disable-CsPreventPolicy',
-    'Edit-CsPreventPolicy',
-    'Enable-CsPreventPolicy',
-    'Get-CsPreventMemberId',
-    'Get-CsPreventMemberInfo',
-    'Get-CsPreventPolicyId',
-    'Get-CsPreventPolicyInfo',
-    'New-CsPreventPolicy',
-    'Remove-CsPreventGroup',
-    'Remove-CsPreventPolicy',
-    'Set-CsPreventPrecedence',
-
-    # real-time-response
-    'Confirm-RtrBatch',
-    'Confirm-RtrGet',
-    'Get-RtrFileId',
-    'Get-RtrFileInfo',
-    'Get-RtrScriptId',
-    'Get-RtrScriptInfo',
-    'New-RtrFile',
-    'New-RtrScript',
-    'Receive-RtrGet',
-    'Remove-RtrFile',
-    'Remove-RtrScript',
-    'Send-RtrCommand',
-    'Send-RtrGet',
-    'Start-RtrBatch',
-
-    # sensor-download
-    'Get-CsCCID',
-    'Get-CsInstallerId',
-    'Get-CsInstallerInfo',
-    'Receive-CsInstaller',
-
-    # sensor-update-policies
-    'Add-CsSensorGroup',
-    'Disable-CsSensorPolicy',
-    'Edit-CsSensorPolicy',
-    'Enable-CsSensorPolicy',
-    'Get-CsSensorBuild',
-    'Get-CsSensorMemberId',
-    'Get-CsSensorMemberInfo',
-    'Get-CsSensorPolicyId',
-    'Get-CsSensorPolicyInfo',
-    'Get-CsUninstallToken',
-    'New-CsSensorPolicy',
-    'Remove-CsSensorGroup',
-    'Remove-CsSensorPolicy',
-    'Set-CsSensorPrecedence',
+    'Request-Token',
+    'Revoke-Token',
 
     # spotlight-vulnerabilities
-    'Get-CsVulnId',
-    'Get-CsVulnInfo',
-
-    # tools
-    'Convert-RtrResult',
-    'Invoke-CsAPI',
-    'Join-CsResult',
-    'Split-CsArray',
-
-    # user-management
-    'Add-CsUser',
-    'Add-CsUserRole',
-    'Edit-CsUser',
-    'Get-CsRole',
-    'Get-CsUserId',
-    'Get-CsUserInfo',
-    'Get-CsUsername',
-    'Get-CsUserRole',
-    'Remove-CsUser',
-    'Remove-CsUserRole'
+    'Get-Vulnerability'
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
@@ -526,9 +142,9 @@ PrivateData = @{
 } # End of PrivateData hashtable
 
 # HelpInfo URI of this module
-# HelpInfoURI = 'https://github.com/bk-cs/PSFalcon/blob/master/README.md'
+HelpInfoURI = 'https://github.com/bk-cs/PSFalcon/blob/master/README.md'
 
 # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
-# DefaultCommandPrefix = ''
+DefaultCommandPrefix = 'Cs'
 
 }
