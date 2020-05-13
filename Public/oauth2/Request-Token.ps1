@@ -14,6 +14,8 @@ function Request-Token {
     Web proxy address
 .EXAMPLE
     PS> Request-CsToken -Id <string> -Secret <string>
+.LINK
+https://assets.falcon.crowdstrike.com/support/api/swagger.html#/oauth2/oauth2AccessToken
 #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]

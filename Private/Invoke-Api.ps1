@@ -1,19 +1,23 @@
 function Invoke-Api {
 <#
 .SYNOPSIS
-    Invoke-RestMethod wrapper used by PSFalcon
+    Invoke-WebRequest wrapper used by PSFalcon
+.DESCRIPTION
+    Takes input from the PSFalcon commands to structure an Invoke-WebRequest, attaches
+    an existing OAuth2 token from $Falcon, checks for rate limiting, then sends the
+    resulting object to 'Format-Response'
 .PARAMETER URI
-    Partial URI for Invoke-RestMethod request (matched with $Falcon.host)
+    Invoke-WebRequest partial Uri (appended to $Falcon.host)
 .PARAMETER METHOD
-    Method for Invoke-RestMethod request
+    Invoke-WebRequest Method
 .PARAMETER HEADER
-    A hashtable of Invoke-RestMethod header parameters
+    Invoke-WebRequest Header parameter hashtable
 .PARAMETER BODY
-    Body for Invoke-RestMethod request
+    Invoke-WebRequest Body
 .PARAMETER FORM
-    Form for Invoke-RestMethod request
+    Invoke-WebRequest Form
 .PARAMETER OUTFILE
-    Outfile destination path for Invoke-RestMethod request
+    Outfile destination path for Invoke-WebRequest request
 #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]
@@ -52,10 +56,10 @@ function Invoke-Api {
         }
         switch ($PSBoundParameters.Keys) {
             'Body' { $Param['Body'] = $Body }
-            'Form' { $Param['Form'] = $Form } # Unavailable in PowerShell 5.1... New-RtrFile/New-RtrScript
+            'Form' { $Param['Form'] = $Form } # Unavailable in PowerShell 5.1 (Used by New-RtrFile/New-RtrScript)
             'Outfile' { $Param['Outfile'] = $Outfile }
         }
-        # Add header values from PSFalcon function
+        # Add header values
         foreach ($Key in $Header.keys) {
             $Param.Header[$Key] = $Header.$Key
         }

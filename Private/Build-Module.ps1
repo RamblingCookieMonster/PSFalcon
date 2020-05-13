@@ -1,7 +1,10 @@
 function Build-Module {
 <#
 .SYNOPSIS
-    Uses a OpenAPI Swagger Json file to create basic 'Public' modules
+    Uses an OpenAPI Swagger Json file to create basic 'Public' modules
+.DESCRIPTION
+    Runs out of the 'Private' folder to create basic 'Public' functions that serve
+    as a starting point for building a set of PowerShell commands
 .PARAMETER PATH
     Path to swagger.json file
 #>

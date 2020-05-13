@@ -1,7 +1,12 @@
 function Format-Response {
 <#
 .SYNOPSIS
-    Formats a CrowdStrike Falcon OAuth2 API response as a PSObject
+    Formats a CrowdStrike Falcon OAuth2 API response
+.DESCRIPTION
+    Converts the raw content of an Invoke-WebRequest result from Json and attaches
+    'Headers' and 'Status' (StatusCode plus StatusDescription) to an object with a
+    custom PSTypeName. Also sets the default fields to display from the object to the
+    fields returned in 'Content'.
 .PARAMETER REQUEST
     Result object from Invoke-Api
 #>

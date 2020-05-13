@@ -1,13 +1,13 @@
 function Invoke-Loop {
 <#
 .SYNOPSIS
-    Repeats PSFalcon commands until all results are output
+    Repeats PSFalcon commands until all results are retrieved
 .PARAMETER COMMAND
-    The command to repeat
+    The PSFalcon command to repeat
 .PARAMETER PARAM
     Parameters to include when running the command
 .PARAMETER DETAIL
-    Retrieve detailed information
+    Switch to retrieve detailed information
 #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]
