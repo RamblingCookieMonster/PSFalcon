@@ -6,78 +6,77 @@ function Invoke-Loop {
     The PSFalcon command to repeat
 .PARAMETER PARAM
     Parameters to include when running the command
-.PARAMETER DETAIL
-    Switch to retrieve detailed information
+.PARAMETER DETAILED
+    Retrieve detailed information
 #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]
     param(
-        [Parameter(ParameterSetName = 'default')]
-        [Parameter(Mandatory = $true)]
+        [Parameter(ParameterSetName = 'default', Mandatory = $true)]
         [string] $Command,
 
         [Parameter(ParameterSetName = 'default')]
         [hashtable] $Param,
 
         [Parameter(ParameterSetName = 'default')]
-        [switch] $Detail
+        [switch] $Detailed
     )
     process {
-        # Run initial command
-        if ($Detail) {
-            & $Command -Id (& $Command @Param -OutVariable Loop).resources
+        if ($Detailed) {
+            # Request ids
+            $Loop = & $Command @Param
+
+            if ($Loop.resources) {
+                # Output detail
+                & $Command -Id $Loop.resources
+            }
         } else {
+            # Output ids
             & $Command @Param -OutVariable Loop
         }
-        # Determine initial and total counts
-        $Total = $Loop.meta.pagination.total
-        $Count = $Loop.resources.count
-
-        while (($Total -gt $Count) -and (-not($Loop.errors))) {
-            # Output progress
-            if ($Total -gt $Count) {
+        if ($Loop.resources) {
+            for ($i = $Loop.resources.count; $i -lt $Loop.meta.pagination.total; $i += $Loop.resources.count) {
+                # Output progress
                 $Progress = @{
                     Activity = $Command
-                    Status = [string] $Count + ' of ' + [string] $Loop.meta.pagination.total
-                    PercentComplete = ($Count/$Loop.meta.pagination.total)*100
+                    Status = [string] $i + ' of ' + [string] $Loop.meta.pagination.total
+                    PercentComplete = ($i/$Loop.meta.pagination.total)*100
                 }
                 Write-Progress @Progress
-            }
-            # Update pagination
-            if ($Detail) {
+
+                # Set pagination
                 if ($Loop.meta.pagination.after) {
                     # token-based after
-                    & $Command -Id (& $Command @Param -After (
-                    $Loop.meta.pagination.after) -OutVariable Loop).resources
+                    $Param['After'] = $Loop.meta.pagination.after
                 } else {
-                    $Offset = if ($Loop.meta.pagination.offset -match '\d{1,}$') {
-                        # integer-based offset
-                        $Count
+                    $Param['Offset'] = if ($Loop.meta.pagination.offset -match '\d{1,}$') {
+                        # integer-based offset, use current count
+                        $i
                     } else {
                         # token-based offset
                         $Loop.meta.pagination.offset
                     }
-                    # Repeat command
-                    & $Command -Id (& $Command @Param -Offset $Offset -OutVariable Loop).resources
                 }
-            } else {
-                if ($Loop.meta.pagination.after) {
-                    # token-based after
-                    & $Command @Param -After $Loop.meta.pagination.after -OutVariable Loop
-                } else {
-                    $Offset = if ($Loop.meta.pagination.offset -match '\d{1,}$') {
-                        # integer-based offset
-                        $Count
+                if ($Detailed) {
+                    # Retrieve ids
+                    $Loop = & $Command @Param
+
+                    if ($Loop.resources) {
+                        # Output detail
+                        & $Command -Id $Loop.resources
                     } else {
-                        # token-based offset
-                        $Loop.meta.pagination.offset
+                        # Output error
+                        $Loop
+                        break
                     }
-                    # Repeat command
-                    & $Command @Param -Offset $Offset -OutVariable Loop
+                } else {
+                    # Output ids
+                    & $Command @Param -OutVariable Loop
                 }
             }
-            # Update count
-            $Count += $Loop.resources.count
+        } else {
+            # Output error
+            $Loop
         }
     }
 }

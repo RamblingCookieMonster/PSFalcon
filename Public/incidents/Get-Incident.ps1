@@ -14,7 +14,7 @@ function Get-Incident {
     A property to use to sort results
 .PARAMETER OFFSET
     Offset integer to retrieve next result set
-.PARAMETER DETAIL
+.PARAMETER DETAILED
     Retrieve detailed information
 .PARAMETER ALL
     Repeat requests until all available results are retrieved
@@ -53,7 +53,7 @@ function Get-Incident {
         [int] $Offset,
 
         [Parameter(ParameterSetName = 'default')]
-        [switch] $Detail,
+        [switch] $Detailed,
 
         [Parameter(ParameterSetName = 'default')]
         [switch] $All
@@ -100,7 +100,7 @@ function Get-Incident {
             }
         }
         if ($All) {
-            if ($Detail) {
+            if ($Detailed) {
                 Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam -Detail
             } else {
                 Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam
@@ -108,7 +108,7 @@ function Get-Incident {
         } else {
             $Request = Invoke-Api @Param
 
-            if ($Detail -and $Request.resources) {
+            if ($Detailed -and $Request.resources) {
                 $Param.Uri = '/incidents/entities/incidents/GET/v1'
                 $Param.Method = 'post'
                 $Param['Body'] = @{ ids = $Request.resources } | ConvertTo-Json

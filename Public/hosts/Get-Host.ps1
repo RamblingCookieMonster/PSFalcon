@@ -16,7 +16,7 @@ function Get-Host {
     Offset token/integer to retrieve next result set
 .PARAMETER HIDDEN
     Narrow search to 'hidden' hosts
-.PARAMETER DETAIL
+.PARAMETER DETAILED
     Retrieve detailed information
 .PARAMETER ALL
     Repeat requests until all available results are retrieved
@@ -47,7 +47,7 @@ function Get-Host {
 
         [Parameter(ParameterSetName = 'default')]
         [Parameter(ParameterSetName = 'hidden')]
-        [ValidateRange(1, 2000)]
+        [ValidateRange(1, 5000)]
         [int] $Limit,
 
         [Parameter(ParameterSetName = 'default')]
@@ -63,7 +63,7 @@ function Get-Host {
 
         [Parameter(ParameterSetName = 'default')]
         [Parameter(ParameterSetName = 'hidden')]
-        [switch] $Detail,
+        [switch] $Detailed,
 
         [Parameter(ParameterSetName = 'default')]
         [Parameter(ParameterSetName = 'hidden')]
@@ -80,9 +80,6 @@ function Get-Host {
             }
         }
         switch ($PSBoundParameters.Keys) {
-            'Id' {
-                $Param.Uri = '/devices/entities/devices/v1?ids=' + ($Id -join '&ids=')
-            }
             'Hidden' {
                 $Param.Uri = '/devices/queries/devices-hidden/v1?'
                 $LoopParam['Hidden'] = $true
@@ -112,18 +109,26 @@ function Get-Host {
             }
         }
         if ($All) {
-            if ($Detail) {
+            if ($Detailed) {
                 Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam -Detail
             } else {
                 Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam
             }
+        } elseif ($Id) {
+            Split-Array -Uri $Param.Uri -Id $Id | ForEach-Object {
+                $Param.Uri = '/devices/entities/devices/v1?ids=' + ($_ -join '&ids=')
+
+                Invoke-Api @Param
+            }
         } else {
             $Request = Invoke-Api @Param
 
-            if ($Detail -and $Request.resources) {
-                $Param.Uri = '/devices/entities/devices/v1?ids=' + ($Request.resources -join '&ids=')
+            if ($Detailed -and $Request.resources) {
+                Split-Array -Uri $Param.Uri -Id $Request.resources | ForEach-Object {
+                    $Param.Uri = '/devices/entities/devices/v1?ids=' + ($_ -join '&ids=')
 
-                Invoke-Api @Param
+                    Invoke-Api @Param
+                }
             } else {
                 $Request
             }

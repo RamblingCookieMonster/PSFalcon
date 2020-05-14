@@ -18,7 +18,7 @@ function Get-Detection {
     Offset integer to retrieve next result set
 .PARAMETER HIDDEN
     Narrow search to 'hidden' hosts
-.PARAMETER DETAIL
+.PARAMETER DETAILED
     Retrieve detailed information
 .PARAMETER ALL
     Repeat requests until all available results are retrieved
@@ -67,7 +67,7 @@ function Get-Detection {
         [int] $Offset,
 
         [Parameter(ParameterSetName = 'default')]
-        [switch] $Detail,
+        [switch] $Detailed,
 
         [Parameter(ParameterSetName = 'default')]
         [switch] $All
@@ -118,7 +118,7 @@ function Get-Detection {
             }
         }
         if ($All) {
-            if ($Detail) {
+            if ($Detailed) {
                 Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam -Detail
             } else {
                 Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam
@@ -126,7 +126,7 @@ function Get-Detection {
         } else {
             $Request = Invoke-Api @Param
 
-            if ($Detail -and $Request.resources) {
+            if ($Detailed -and $Request.resources) {
                 $Param.Uri = '/detects/entities/summaries/GET/v1'
                 $Param.Method = 'post'
                 $Param.Header['accept'] = 'application/json'

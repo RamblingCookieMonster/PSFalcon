@@ -14,7 +14,7 @@ function Get-Group {
     A property to use to sort results
 .PARAMETER OFFSET
     Offset integer to retrieve next result set
-.PARAMETER DETAIL
+.PARAMETER DETAILED
     Retrieve detailed information
 .PARAMETER MEMBERS
     Retrieve identifiers for the members of a host group
@@ -76,7 +76,7 @@ function Get-Group {
 
         [Parameter(ParameterSetName = 'default')]
         [Parameter(ParameterSetName = 'members')]
-        [switch] $Detail,
+        [switch] $Detailed,
 
         [Parameter(ParameterSetName = 'members', Mandatory = $true)]
         [switch] $Members,
@@ -96,13 +96,13 @@ function Get-Group {
             }
         }
         if ($Members) {
-            if ($Detail) {
+            if ($Detailed) {
                 $Param.Uri = '/devices/combined/host-group-members/v1?id=' + [string] $Id
             } else {
                 $Param.Uri = '/devices/queries/host-group-members/v1?id=' + [string] $Id
             }
             $LoopParam['Members'] = $true
-        } elseif ($Detail) {
+        } elseif ($Detailed) {
             $Param.Uri = '/devices/combined/host-groups/v1?'
         } elseif ($Id) {
             $Param.Uri = '/devices/entities/host-groups/v1?ids=' + ($Id -join '&ids=')
@@ -133,7 +133,7 @@ function Get-Group {
             }
         }
         if ($All) {
-            if ($Detail) {
+            if ($Detailed) {
                 Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam -Detail
             } else {
                 Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam
