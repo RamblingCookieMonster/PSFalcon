@@ -210,7 +210,7 @@ function Build-Module {
                             "                `$Param.Uri += '&" + $Item.name + "='"
 
                             if ($Item.type -eq 'array') {
-                                $ProcessText += " (`$" + $Culture.ToTitleCase($Item.name) +
+                                $ProcessText += " + (`$" + $Culture.ToTitleCase($Item.name) +
                                 " -join '&" + $Item.name + "=')`n"
                             } else {
                                 $ProcessText += " `$" + $Culture.ToTitleCase($Item.name) + "`n"
