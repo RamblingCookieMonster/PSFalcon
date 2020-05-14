@@ -26,7 +26,7 @@ function Get-Detection {
     PS> Get-CsDetection
     Returns an unfiltered list of detection identifiers
 .EXAMPLE
-    PS> Get-CsDetection -Detail
+    PS> Get-CsDetection -Detailed
     Returns an unfiltered list of detailed detection information
 .EXAMPLE
     PS> Get-CsDetection -Filter "status:'new'"
@@ -45,7 +45,7 @@ function Get-Detection {
             if ($_.count -le 1000) {
                 $true
             } else {
-                throw 'Maximum of 1000 ids per request.'
+                throw 'Maximum of 1,000 ids per request.'
             }
         })]
         [array] $Id,
@@ -57,7 +57,7 @@ function Get-Detection {
         [string] $Query,
 
         [Parameter(ParameterSetName = 'default')]
-        [ValidateRange(1, 1000)]
+        [ValidateRange(1, 9999)]
         [int] $Limit,
 
         [Parameter(ParameterSetName = 'default')]

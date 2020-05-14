@@ -24,10 +24,10 @@ function Get-Group {
     PS> Get-CsGroup
     Returns an unfiltered list of host group identifiers
 .EXAMPLE
-    PS> Get-CsGroup -Detail
+    PS> Get-CsGroup -Detailed
     Returns an unfiltered list of detailed host group information
 .EXAMPLE
-    PS> Get-CsGroup -Id group_id_1 -Members -Detail
+    PS> Get-CsGroup -Id group_id_1 -Members -Detailed
     Returns detailed host information for members of 'group_id_1'
 .EXAMPLE
     PS> Get-CsGroup -Filter "name:'Example'"
@@ -49,11 +49,6 @@ function Get-Group {
             } else {
                 throw 'Only one identifier permitted when requesting members.'
             }
-            if ($_.count -le 2000) {
-                $true
-            } else {
-                throw 'Maximum of 2000 ids per request.'
-            }
         })]
         [array] $Id,
 
@@ -63,7 +58,7 @@ function Get-Group {
 
         [Parameter(ParameterSetName = 'default')]
         [Parameter(ParameterSetName = 'members')]
-        [ValidateRange(1, 2000)]
+        [ValidateRange(1, 5000)]
         [int] $Limit,
 
         [Parameter(ParameterSetName = 'default')]
@@ -104,8 +99,6 @@ function Get-Group {
             $LoopParam['Members'] = $true
         } elseif ($Detailed) {
             $Param.Uri = '/devices/combined/host-groups/v1?'
-        } elseif ($Id) {
-            $Param.Uri = '/devices/entities/host-groups/v1?ids=' + ($Id -join '&ids=')
         }
         switch ($PSBoundParameters.Keys) {
             'Filter' {
@@ -134,9 +127,15 @@ function Get-Group {
         }
         if ($All) {
             if ($Detailed) {
-                Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam -Detail
+                Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam -Detailed
             } else {
                 Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam
+            }
+        } elseif ($Id -and (-not($Members))) {
+            Split-Array -Uri $Param.Uri -Id $Id | ForEach-Object {
+                $Param.Uri = '/devices/entities/host-groups/v1?ids=' + ($_ -join '&ids=')
+
+                Invoke-Api @Param
             }
         } else {
             Invoke-Api @Param

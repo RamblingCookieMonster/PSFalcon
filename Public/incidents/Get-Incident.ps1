@@ -22,7 +22,7 @@ function Get-Incident {
     PS> Get-CsIncident
     Returns an unfiltered list of incident identifiers
 .EXAMPLE
-    PS> Get-CsIncident -Detail
+    PS> Get-CsIncident -Detailed
     Returns an unfiltered list of detailed incident information
 .EXAMPLE
     PS> Get-CsIncident -Filter "host_ids:'host_id_1'"
@@ -101,7 +101,7 @@ function Get-Incident {
         }
         if ($All) {
             if ($Detailed) {
-                Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam -Detail
+                Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam -Detailed
             } else {
                 Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam
             }

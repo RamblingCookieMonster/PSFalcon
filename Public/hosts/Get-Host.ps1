@@ -24,7 +24,7 @@ function Get-Host {
     PS> Get-CsDevice
     Returns an unfiltered list of host identifiers
 .EXAMPLE
-    PS> Get-CsDevice -Detail
+    PS> Get-CsDevice -Detailed
     Returns an unfiltered list of detailed host information
 .EXAMPLE
     PS> Get-CsDevice -Filter "hostname:'USER-PC'"
@@ -110,7 +110,7 @@ function Get-Host {
         }
         if ($All) {
             if ($Detailed) {
-                Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam -Detail
+                Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam -Detailed
             } else {
                 Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam
             }

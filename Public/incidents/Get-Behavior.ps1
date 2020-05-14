@@ -22,7 +22,7 @@ function Get-Behavior {
     PS> Get-CsBehavior
     Returns an unfiltered list of behavior identifiers
 .EXAMPLE
-    PS> Get-CsBehavior -Detail
+    PS> Get-CsBehavior -Detailed
     Returns an unfiltered list of detailed behavior information
 .EXAMPLE
     PS> Get-CsBehavior -Filter "aid:'host_id_1'"
@@ -101,7 +101,7 @@ function Get-Behavior {
         }
         if ($All) {
             if ($Detailed) {
-                Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam -Detail
+                Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam -Detailed
             } else {
                 Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam
             }
