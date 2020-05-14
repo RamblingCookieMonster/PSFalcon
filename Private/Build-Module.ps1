@@ -213,7 +213,7 @@ function Build-Module {
                                 $ProcessText += " + (`$" + $Culture.ToTitleCase($Item.name) +
                                 " -join '&" + $Item.name + "=')`n"
                             } else {
-                                $ProcessText += " `$" + $Culture.ToTitleCase($Item.name) + "`n"
+                                $ProcessText += " + `$" + $Culture.ToTitleCase($Item.name) + "`n"
                             }
                             $ProcessText += "                `$LoopParam['" + $Culture.ToTitleCase($Item.name) +
                             "'] = `$" + $Culture.ToTitleCase($Item.name) + "`n" + "            }`n"
