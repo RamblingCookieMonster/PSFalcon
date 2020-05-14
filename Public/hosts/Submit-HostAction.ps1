@@ -47,8 +47,11 @@ https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/PerformAct
             'Debug' { $Param['Debug'] = $true }
         }
         if ($Action -eq 'hide_host' -or 'unhide_host') {
-            # Make requests in groups of 100 for 'hide_host' and 'unhide_host'
-            for ($i = 0; $i -lt $Id.count; $i += 100) {
+            # Max group size
+            $Max = 100
+
+            # Make requests in groups of $Max for 'hide_host' and 'unhide_host'
+            for ($i = 0; $i -lt $Id.count; $i += $Max) {
                 if ($i -gt 0) {
                     $Progress = @{
                         Activity = $MyInvocation.MyCommand.Name
@@ -57,7 +60,7 @@ https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/PerformAct
                     }
                     Write-Progress @Progress
                 }
-                $Param.Body = @{ 'ids' = @($Id[$i..($i + 99)]) } | ConvertTo-Json
+                $Param.Body = @{ 'ids' = @($Id)[$i..($i + ($Max - 1))] } | ConvertTo-Json
 
                 Invoke-Api @Param
             }
