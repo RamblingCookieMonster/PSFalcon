@@ -18,8 +18,6 @@ function New-Group {
 .EXAMPLE
     PS> New-CsGroup -Name Workstations -Type dynamic -Rule product_type_desc:'Workstation'+os_version:'Windows 10'"
     Creates a new dynamic host group named 'Workstations' with assignment rules 'Type: Workstations' and "OS: Windows 10"
-.LINK
-    https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/createHostGroups
 #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]

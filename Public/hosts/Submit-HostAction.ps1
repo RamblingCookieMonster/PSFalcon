@@ -19,8 +19,6 @@ function Submit-HostAction {
 .EXAMPLE
     PS> Submit-CsHostAction -Id host_id_1, host_id_2 -Action unhide_host
     Restores hidden host identifiers 'host_id_1' and 'host_id_2'
-.LINK
-https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/PerformActionV2
 #>
     [CmdletBinding(DefaultParameterSetName='default')]
     [OutputType()]

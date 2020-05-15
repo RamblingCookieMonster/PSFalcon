@@ -9,8 +9,6 @@ function Remove-Group {
 .EXAMPLE
     PS> Remove-Group -Id group_id_1, group_id_2
     Removes host groups 'group_id_1' and 'group_id_2'
-.LINK
-    https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/deleteHostGroups
 #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]

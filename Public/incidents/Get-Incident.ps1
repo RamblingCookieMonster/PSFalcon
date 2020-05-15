@@ -30,8 +30,6 @@ function Get-Incident {
 .EXAMPLE
     PS> Get-CsIncident -Id incident_id_1, incident_id_2
     Returns detail about incident identifiers 'incident_id_1' and 'incident_id_2'
-.LINK
-    https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents
 #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]

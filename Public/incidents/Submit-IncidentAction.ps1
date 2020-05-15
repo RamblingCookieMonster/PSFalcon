@@ -20,8 +20,6 @@ function Submit-IncidentAction {
 .EXAMPLE
     PS> Submit-CsIncidentAction -Id 'incident_id_1' -Action update_status -Value closed
     Sets the status for 'incident_id_1' to 'closed'
-.LINK
-    https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/PerformIncidentAction
 #>
     [CmdletBinding(DefaultParameterSetName='default')]
     [OutputType()]

@@ -17,8 +17,6 @@ function Edit-Detection {
 .EXAMPLE
     PS> Edit-CsDetection -Id detection_id_1 -Status 'true_positive'
     Sets the status for 'detection_id_1' to 'true_positive'
-.LINK
-    https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/UpdateDetectsByIdsV2
 #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]

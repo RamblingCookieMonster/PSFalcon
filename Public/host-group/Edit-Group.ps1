@@ -14,8 +14,6 @@ function Edit-Group {
     The assignment rule, used with dynamic host groups
 .EXAMPLE
     PS> Edit-CsGroup -Id group_id_1
-.LINK
-    https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/updateHostGroups
 #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]

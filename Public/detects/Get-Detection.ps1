@@ -34,8 +34,6 @@ function Get-Detection {
 .EXAMPLE
     PS> Get-CsDetection -Id detection_id_1, detection_id_2
     Returns detail about detection identifiers 'detection_id_1' and 'detection_id_2'
-.LINK
-    https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects
 #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]

@@ -30,8 +30,6 @@ function Get-Behavior {
 .EXAMPLE
     PS> Get-CsBehavior -Id behavior_id_1, behavior_id_2
     Returns detail about behavior identifiers 'behavior_id_1' and 'behavior_id_2'
-.LINK
-    https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents
 #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]

@@ -17,8 +17,6 @@ function Submit-GroupAction {
 .EXAMPLE
     PS> Submit-CsGroupAction -Id group_id -Name remove-hosts -Hosts host_id_1, host_id_2
     Removes 'host_id_1' and 'host_id_2' from static host group 'group_id'
-.LINK
-    https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/performGroupAction
 #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]

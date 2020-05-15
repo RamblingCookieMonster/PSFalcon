@@ -32,8 +32,6 @@ function Get-Host {
 .EXAMPLE
     PS> Get-CsDevice -Id host_id_1, host_id_2
     Returns detail about host identifiers 'host_id_1' and 'host_id_2'
-.LINK
-    https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts
 #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]

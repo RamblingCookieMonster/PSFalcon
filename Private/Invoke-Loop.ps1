@@ -64,10 +64,6 @@ function Invoke-Loop {
                     if ($Loop.resources) {
                         # Output detail
                         & $Command -Id $Loop.resources
-                    } else {
-                        # Output error
-                        $Loop
-                        break
                     }
                 } else {
                     # Output ids

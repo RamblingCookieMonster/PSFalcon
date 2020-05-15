@@ -4,8 +4,6 @@ function Revoke-Token {
     Revoke your current OAuth2 access token before the end of its standard 30-minute lifespan
 .EXAMPLE
     PS> Revoke-CsToken
-.LINK
-https://assets.falcon.crowdstrike.com/support/api/swagger.html#/oauth2/oauth2RevokeToken
 #>
     [CmdletBinding()]
     [OutputType()]

@@ -17,8 +17,6 @@ function Get-Score {
 .EXAMPLE
     PS> Get-CsScore
     Returns an unfiltered list of CrowdScores
-.LINK
-    https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/CrowdScore
 #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]
