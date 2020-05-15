@@ -6,6 +6,8 @@ function Get-Group {
     Requires host-group:read
 .PARAMETER ID
     Retrieve detailed information or members for specific host group identifiers
+.PARAMETER MEMBERS
+    Retrieve identifiers for the members of a host group
 .PARAMETER FILTER
     An FQL filter expression used to limit results
 .PARAMETER LIMIT
@@ -16,8 +18,6 @@ function Get-Group {
     Offset integer to retrieve next result set
 .PARAMETER DETAILED
     Retrieve detailed information
-.PARAMETER MEMBERS
-    Retrieve identifiers for the members of a host group
 .PARAMETER ALL
     Repeat requests until all available results are retrieved
 .EXAMPLE
@@ -35,22 +35,16 @@ function Get-Group {
 .EXAMPLE
     PS> Get-CsGroup -Id group_id_1, group_id_2
     Returns detail about host group identifiers 'group_id_1' and 'group_id_2'
-.LINK
-    https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group
 #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]
     param(
         [Parameter(ParameterSetName = 'id', Mandatory = $true)]
         [Parameter(ParameterSetName = 'members', Mandatory = $true)]
-        [ValidateScript({
-            if (($PSBoundParameters.Members -eq $true) -and ($_.count -eq 1)) {
-                $true
-            } else {
-                throw 'Only one identifier permitted when requesting members.'
-            }
-        })]
         [array] $Id,
+
+        [Parameter(ParameterSetName = 'members', Mandatory = $true)]
+        [switch] $Members,
 
         [Parameter(ParameterSetName = 'default')]
         [Parameter(ParameterSetName = 'members')]
@@ -73,9 +67,6 @@ function Get-Group {
         [Parameter(ParameterSetName = 'members')]
         [switch] $Detailed,
 
-        [Parameter(ParameterSetName = 'members', Mandatory = $true)]
-        [switch] $Members,
-
         [Parameter(ParameterSetName = 'default')]
         [Parameter(ParameterSetName = 'members')]
         [switch] $All
@@ -92,9 +83,9 @@ function Get-Group {
         }
         if ($Members) {
             if ($Detailed) {
-                $Param.Uri = '/devices/combined/host-group-members/v1?id=' + [string] $Id
+                $Param.Uri = '/devices/combined/host-group-members/v1?'
             } else {
-                $Param.Uri = '/devices/queries/host-group-members/v1?id=' + [string] $Id
+                $Param.Uri = '/devices/queries/host-group-members/v1?'
             }
             $LoopParam['Members'] = $true
         } elseif ($Detailed) {
@@ -126,12 +117,33 @@ function Get-Group {
             }
         }
         if ($All) {
-            if ($Detailed) {
+            if ($Members) {
+                $BaseUri = $Param.Uri
+
+                $Id | ForEach-Object {
+                    $Param.Uri = $BaseUri -replace '/v1\?',('/v1?id=' + [string] $_)
+
+                    if ($Detailed) {
+                        Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam -Detailed
+                    } else {
+                        Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam
+                    }
+                }
+            }
+            elseif ($Detailed) {
                 Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam -Detailed
             } else {
                 Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam
             }
-        } elseif ($Id -and (-not($Members))) {
+        } elseif ($Members) {
+            $BaseUri = $Param.Uri
+
+            $Id | ForEach-Object {
+                $Param.Uri = $BaseUri -replace '/v1\?',('/v1?id=' + [string] $_)
+
+                Invoke-Api @Param
+            }
+        } elseif ($Id) {
             Split-Array -Uri $Param.Uri -Id $Id | ForEach-Object {
                 $Param.Uri = '/devices/entities/host-groups/v1?ids=' + ($_ -join '&ids=')
 
