@@ -1,11 +1,11 @@
-function Get-Group {
+function Get-GroupMember {
 <#
 .SYNOPSIS
-    Search for host groups in your environment
+    Search for host group members in your environment
 .DESCRIPTION
     Requires host-group:read
 .PARAMETER ID
-    Retrieve detailed information about specific host group identifiers
+    Host group identifier
 .PARAMETER FILTER
     An FQL filter expression used to limit results
 .PARAMETER LIMIT
@@ -19,23 +19,20 @@ function Get-Group {
 .PARAMETER ALL
     Repeat requests until all available results are retrieved
 .EXAMPLE
-    PS> Get-CsGroup
-    Returns host group identifiers
+    PS> Get-CsGroupMember -Id group_id_1
+    Returns member device identifiers
 .EXAMPLE
-    PS> Get-CsGroup -Detailed
-    Returns detailed host group information
+    PS> Get-CsGroupMember -Id group_id_1 -Detailed
+    Returns detailed member device information
 .EXAMPLE
-    PS> Get-CsGroup -Filter "name:'Example'"
-    Returns the identifier for a host group named 'Example'
-.EXAMPLE
-    PS> Get-CsGroup -Id group_id_1, group_id_2
-    Returns detail about host group identifiers 'group_id_1' and 'group_id_2'
+    PS> Get-CsGroupMember -Id group_id_1 -Filter "hostname:'Example'"
+    Returns device identifiers for devices with hostname 'Example' in 'group_id_1'
 #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]
     param(
-        [Parameter(ParameterSetName = 'id', Mandatory = $true)]
-        [array] $Id,
+        [Parameter(ParameterSetName = 'default', Mandatory = $true, ValueFromPipeline = $true)]
+        [string] $Id,
 
         [Parameter(ParameterSetName = 'default')]
         [string] $Filter,
@@ -57,10 +54,11 @@ function Get-Group {
         [switch] $All
     )
     process {
-        $LoopParam = @{ }
-
+        $LoopParam = @{
+            Id = $Id
+        }
         $Param = @{
-            Uri    = '/devices/queries/host-groups/v1?'
+            Uri    = '/devices/queries/host-group-members/v1?id=' + $Id
             Method = 'get'
             Header = @{
                 'content-type' = 'application/json'
@@ -69,7 +67,7 @@ function Get-Group {
         if ($Detailed) {
             $LoopParam['Detailed'] = $true
 
-            $Param.Uri = '/devices/combined/host-groups/v1?'
+            $Param.Uri = '/devices/combined/host-group-members/v1?id=' + $Id
         }
         switch ($PSBoundParameters.Keys) {
             'Filter' {
@@ -98,12 +96,6 @@ function Get-Group {
         }
         if ($All) {
             Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam
-        } elseif ($Id) {
-            Split-Array -Uri $Param.Uri -Id $Id | ForEach-Object {
-                $Param.Uri = '/devices/entities/host-groups/v1?ids=' + ($_ -join '&ids=')
-
-                Invoke-Api @Param
-            }
         } else {
             Invoke-Api @Param
         }

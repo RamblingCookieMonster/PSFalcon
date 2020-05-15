@@ -77,6 +77,7 @@ FunctionsToExport = @(
     # host-group
     'Edit-Group',
     'Get-Group',
+    'Get-GroupMember',
     'New-Group',
     'Remove-Group',
     'Submit-GroupAction',
@@ -94,6 +95,15 @@ FunctionsToExport = @(
     # oauth2
     'Request-Token',
     'Revoke-Token',
+
+    # policies
+    'Edit-Policy',
+    'Get-Policy',
+    'Get-PolicyMember',
+    'New-Policy',
+    'Remove-Policy',
+    'Set-PolicyPrecedence',
+    'Submit-PolicyAction',
 
     # spotlight-vulnerabilities
     'Get-Vulnerability'
