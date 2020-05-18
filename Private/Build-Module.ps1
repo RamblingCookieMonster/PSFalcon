@@ -109,7 +109,7 @@ function Build-Module {
                     $FunctionName = "function " + $_.reference + " {`n"
 
                     # Param text
-                    $ParamText = "    [CmdletBinding(DefaultParameterSetName='default')]`n" +
+                    $ParamText = "    [CmdletBinding(DefaultParameterSetName= 'default')]`n" +
                     "    [OutputType()]`n" +
                     "    param("
 

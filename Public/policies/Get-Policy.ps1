@@ -3,7 +3,12 @@ function Get-Policy {
 .SYNOPSIS
     Search for policies in your environment
 .DESCRIPTION
-    Requires prevention-policies:read
+    Requires the following, based on type:
+
+    device-control-policies:read
+    firewall-management:read
+    prevention-policies:read
+    sensor-update-policies:read
 .PARAMETER TYPE
     Type of policy
 .PARAMETER ID
