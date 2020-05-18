@@ -12,7 +12,7 @@ function Edit-Policy {
 .PARAMETER TYPE
     Type of policy
 .PARAMETER ID
-    Policy id
+    Policy identifier
 .PARAMETER NAME
     Policy name
 .PARAMETER DESCRIPTION
@@ -21,10 +21,10 @@ function Edit-Policy {
     An array of policy settings
 .EXAMPLE
     PS> Edit-CsPolicy -Type Prevention -Id policy_id_1 -Name Example
-    Sets the name of 'policy_id_1' to 'Example'
+    Sets the name of prevention policy identifier 'policy_id_1' to 'Example'
 .EXAMPLE
     PS> Edit-CsPolicy -Type Prevention -Id policy_id_1 -Settings @(@{ id = 'EndUserNotifications'; value = @{ enabled = $true }})
-    Enables the 'EndUserNotifications' setting on 'policy_id_1'
+    Enables the 'EndUserNotifications' setting on prevention policy identifier 'policy_id_1'
 #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]

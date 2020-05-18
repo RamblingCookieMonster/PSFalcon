@@ -12,7 +12,9 @@ function New-Policy {
 .PARAMETER TYPE
     Type of policy
 .PARAMETER CLONEID
-    A policy id to clone
+    Policy identifier to clone
+.PARAMETER PLATFORM
+    Operating system platform
 .PARAMETER NAME
     Policy name
 .PARAMETER DESCRIPTION
@@ -21,7 +23,7 @@ function New-Policy {
     An array of policy settings
 .EXAMPLE
     PS> New-CsPolicy -Type Prevention -CloneId policy_id_1 -Platform Windows -Name Example
-    Clones the Windows-specific prevention policy 'policy_id_1' into a new policy named 'Example'
+    Clones the Windows-specific prevention policy identifier 'policy_id_1' into a new policy named 'Example'
 .EXAMPLE
     PS> New-CsPolicy -Type Prevention -Name Example -Settings @(@{ id = 'EndUserNotifications'; value = @{ enabled = $true }})
     Creates a new Windows-specific prevention policy named 'Example' with the 'EndUserNotifications' prevention setting enabled

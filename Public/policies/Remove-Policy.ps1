@@ -12,10 +12,10 @@ function Remove-Policy {
 .PARAMETER TYPE
     Type of policy
 .PARAMETER ID
-    One or more policy ids
+    One or more policy identifiers
 .EXAMPLE
     PS> Remove-CsPolicy -Type Prevention -Ids 'policy_id_1', 'policy_id_2'
-    Removes prevention policies 'policy_id_1' and 'policy_id_2'
+    Removes prevention policy identifiers 'policy_id_1' and 'policy_id_2'
 #>
     [CmdletBinding(DefaultParameterSetName='default')]
     [OutputType()]
