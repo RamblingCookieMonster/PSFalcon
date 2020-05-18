@@ -50,7 +50,7 @@ function Edit-Policy {
         switch ($Type) {
             'DeviceControl' { $EntityUri = '/policy/entities/device-control/v1' }
             'Firewall' { $EntityUri = '/policy/entities/firewall/v1' }
-            'SensorUpdate' { $EntityUri = '/policy/entities/sensor-update/v1' }
+            'SensorUpdate' { $EntityUri = '/policy/entities/sensor-update/v2' }
             'Prevention' { $EntityUri = '/policy/entities/prevention/v1' }
         }
         $Body = @{
