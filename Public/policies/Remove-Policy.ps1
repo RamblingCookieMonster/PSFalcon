@@ -9,6 +9,8 @@ function Remove-Policy {
     firewall-management:write
     prevention-policies:write
     sensor-update-policies:write
+.PARAMETER TYPE
+    Type of policy
 .PARAMETER ID
     One or more policy ids
 .EXAMPLE
