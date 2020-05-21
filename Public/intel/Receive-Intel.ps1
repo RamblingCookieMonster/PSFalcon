@@ -1,36 +1,31 @@
-function Receive-Installer {
+function Receive-Intel {
 <#
 .SYNOPSIS
-    Download a sensor installer file
+    Download an intelligence report PDF
 .DESCRIPTION
-    Requires sensor-installers:read
+    Requires falconx-reports:read
 .PARAMETER ID
-    SHA256 hash
+    Intelligence report identifier
 .PARAMETER PATH
     Destination path
 .EXAMPLE
-    PS> Receive-CsInstaller -Id sha256_hash -Path .\WindowsSensor.exe
-    Downloads the sensor installer 'sha256_hash' and as .\WindowsSensor.exe
+    PS> Receive-CsIntel -Id report_id_1 -Path .\report.pdf
+    Downloads the intelligence report 'report_id_1' as .\report.pdf
 #>
     [CmdletBinding(DefaultParameterSetName='default')]
     [OutputType()]
     param(
         [Parameter(ParameterSetName = 'default', Mandatory = $true)]
-        [ValidateLength(64,64)]
         [string] $Id,
 
-        [Parameter(Mandatory = $true)]
-        [string]
-        $Path
+        [Parameter(ParameterSetName = 'default', Mandatory = $true)]
+        [string] $Path
     )
     process {
         $Param = @{
-            Uri    = '/sensors/entities/download-installer/v1?id=' + $Id
+            Uri    = '/intel/entities/report-files/v1?id=' + $Id
             Method = 'get'
-            Header = @{
-                accept = 'application/json'
-                'content-type' = 'application/json'
-            }
+            Header = @{ accept = 'application/pdf' }
             OutFile = $Path
         }
         switch ($PSBoundParameters.Keys) {

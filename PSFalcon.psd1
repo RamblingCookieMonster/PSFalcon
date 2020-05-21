@@ -97,6 +97,14 @@ FunctionsToExport = @(
     'Get-Installer',
     'Receive-Installer',
 
+    # intel
+    'Get-Actor',
+    'Get-Indicator',
+    'Get-Intel',
+    'Get-Rule',
+    'Receive-Intel',
+    'Receive-Rule',
+
     # oauth2
     'Request-Token',
     'Revoke-Token',
