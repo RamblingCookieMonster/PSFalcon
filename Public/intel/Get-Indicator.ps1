@@ -58,7 +58,7 @@ function Get-Indicator {
         [int] $Offset,
 
         [Parameter(ParameterSetName = 'default')]
-        [switch] $Deleted,
+        [boolean] $Deleted,
 
         [Parameter(ParameterSetName = 'default')]
         [switch] $Detailed,

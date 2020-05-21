@@ -105,6 +105,12 @@ FunctionsToExport = @(
     'Receive-Intel',
     'Receive-Rule',
 
+    # iocs
+    'Edit-IOC',
+    'Get-IOC',
+    'New-IOC',
+    'Remove-IOC',
+
     # oauth2
     'Request-Token',
     'Revoke-Token',
@@ -114,6 +120,7 @@ FunctionsToExport = @(
     'Get-Build',
     'Get-Policy',
     'Get-PolicyMember',
+    'Get-UninstallToken',
     'New-Policy',
     'Remove-Policy',
     'Set-PolicyPrecedence',
