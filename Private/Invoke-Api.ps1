@@ -99,6 +99,7 @@ function Invoke-Api {
         }
     }
     end {
-        Format-Response $Request
+        # Format output
+        if ($Request) { Format-Response $Request }
     }
 }

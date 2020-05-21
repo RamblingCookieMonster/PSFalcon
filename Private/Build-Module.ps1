@@ -75,13 +75,7 @@ function Build-Module {
                                                 }
                                                 $ParamObject['format'] = $Properties
                                             } else {
-                                                if ($_ -eq 'name') {
-                                                    # Remove non-word characters and capitalize name
-                                                    $ParamObject[$_] = $Parameter.$_ -replace (
-                                                        '[^a-zA-Z0-9]', '')
-                                                } else {
-                                                    $ParamObject[$_] = $Parameter.$_
-                                                }
+                                                $ParamObject[$_] = $Parameter.$_
                                             }
                                         }
                                         $Object.parameters += $ParamObject

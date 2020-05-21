@@ -92,6 +92,11 @@ FunctionsToExport = @(
     'Get-Score',
     'Submit-IncidentAction',
 
+    # installers
+    'Get-CCID',
+    'Get-Installer',
+    'Receive-Installer',
+
     # oauth2
     'Request-Token',
     'Revoke-Token',
@@ -106,7 +111,15 @@ FunctionsToExport = @(
     'Submit-PolicyAction',
 
     # spotlight
-    'Get-Vulnerability'
+    'Get-Vulnerability',
+
+    # users
+    'Edit-User',
+    'Get-Role',
+    'Get-User',
+    'New-User',
+    'Remove-User',
+    'Submit-UserAction'
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
