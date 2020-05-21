@@ -111,6 +111,7 @@ FunctionsToExport = @(
 
     # policies
     'Edit-Policy',
+    'Get-Build',
     'Get-Policy',
     'Get-PolicyMember',
     'New-Policy',

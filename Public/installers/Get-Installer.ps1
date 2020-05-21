@@ -47,8 +47,9 @@ function Get-Installer {
                 'content-type' = 'application/json'
             }
         }
+        if ($Detailed) { $Param.Uri = '/sensors/combined/installers/v1?' }
+
         switch ($PSBoundParameters.Keys) {
-            'Detailed' { $Param.Uri = '/sensors/combined/installers/v1?' }
             'Offset' { $Param.Uri += '&offset=' + $Offset }
             'Limit' { $Param.Uri += '&limit=' + $Limit }
             'Sort' { $Param.Uri += '&sort=' + $Sort }
