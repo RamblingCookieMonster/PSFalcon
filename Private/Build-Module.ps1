@@ -3,8 +3,10 @@ function Build-Module {
 .SYNOPSIS
     Uses an OpenAPI Swagger Json file to create basic 'Public' modules
 .DESCRIPTION
-    Runs out of the 'Private' folder to create basic 'Public' functions that serve
-    as a starting point for building a set of PowerShell commands
+    Creates a folder within the current directory titled 'Build' and populates it with
+    a set of basic 'Public' functions that can serve as a starting point for building
+    a set of PowerShell commands. These auto-generated functions will need to be reviewed and
+    otherwise customized before actual use.
 .PARAMETER PATH
     Path to swagger.json file
 #>
@@ -92,12 +94,12 @@ function Build-Module {
         if ($PSBoundParameters.Debug -ne $true) {
             # Create folders
             ($Output.folder | Group-Object).name | ForEach-Object {
-                if (-not(Test-Path ($PSScriptRoot + '\..\Public\' + $_))) {
-                    New-Item -ItemType Directory -Path ($PSScriptRoot + '\..\Public\' + $_) > $null
+                if (-not(Test-Path ($PSScriptRoot + '\Build\' + $_))) {
+                    New-Item -ItemType Directory -Path ($PSScriptRoot + '\Build\' + $_) > $null
                 }
             }
             $Output | ForEach-Object {
-                if (-not(Test-Path ($PSScriptRoot + '\..\Public\' + $_.folder + '\' +
+                if (-not(Test-Path ($PSScriptRoot + '\Build\' + $_.folder + '\' +
                 $_.reference + '.ps1'))) {
                     # Function name
                     $FunctionName = "function " + $_.reference + " {`n"
@@ -234,7 +236,7 @@ function Build-Module {
                     $ContentText = $FunctionName + $HelpText + $ParamText + $ProcessText + "}"
 
                     # Add content to file
-                    New-Item -ItemType File -Path ($PSScriptRoot + '\..\Public\' + $_.folder +
+                    New-Item -ItemType File -Path ($PSScriptRoot + '\Build\' + $_.folder +
                     '\' + $_.reference + '.ps1') -Value $ContentText > $null
                 }
             }
