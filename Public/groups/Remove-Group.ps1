@@ -13,7 +13,7 @@ function Remove-Group {
     [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]
     param(
-        [Parameter(ParameterSetName = 'default', Mandatory = $true)]
+        [Parameter(ParameterSetName = 'default', Mandatory = $true, Position = 0)]
         [array] $Id
     )
     process {

@@ -15,11 +15,11 @@ function Remove-IOC {
     [CmdletBinding(DefaultParameterSetName='default')]
     [OutputType()]
     param(
-        [Parameter(ParameterSetName = 'default', Mandatory = $true)]
+        [Parameter(ParameterSetName = 'default', Mandatory = $true, Position = 0)]
         [ValidateSet('domain', 'ipv4', 'ipv6', 'md5', 'sha256')]
         [string] $Type,
 
-        [Parameter(ParameterSetName = 'default', Mandatory = $true)]
+        [Parameter(ParameterSetName = 'default', Mandatory = $true, Position = 1)]
         [string] $Value
     )
     process {

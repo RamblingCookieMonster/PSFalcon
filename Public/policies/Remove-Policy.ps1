@@ -20,11 +20,11 @@ function Remove-Policy {
     [CmdletBinding(DefaultParameterSetName='default')]
     [OutputType()]
     param(
-        [Parameter(ParameterSetName = 'default', Mandatory = $true)]
+        [Parameter(ParameterSetName = 'default', Mandatory = $true, Position = 0)]
         [ValidateSet('DeviceControl', 'Firewall', 'SensorUpdate', 'Prevention')]
         [string] $Type,
 
-        [Parameter(ParameterSetName = 'default', Mandatory = $true)]
+        [Parameter(ParameterSetName = 'default', Mandatory = $true, Position = 1)]
         [array] $Id
     )
     begin {

@@ -13,7 +13,7 @@ function Remove-User {
     [CmdletBinding(DefaultParameterSetName='default')]
     [OutputType()]
     param(
-        [Parameter(ParameterSetName = 'default', Mandatory = $true)]
+        [Parameter(ParameterSetName = 'default', Mandatory = $true, Position = 0)]
         [ValidateLength(36,36)]
         [string] $Id
     )
