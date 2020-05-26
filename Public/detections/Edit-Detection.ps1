@@ -5,11 +5,11 @@ function Edit-Detection {
 .DESCRIPTION
     Requires detects:write
 .PARAMETER ID
-    One or more detection ids
+    One or more detection identifiers
 .PARAMETER STATUS
     Detection status
 .PARAMETER UUID
-    Assign the detection to a specific user ID
+    Assign the detection to a specific user identifier
 .PARAMETER COMMENT
     Optional comment to add to the detection
 .PARAMETER SHOW

@@ -3,7 +3,7 @@ function Request-Token {
 .SYNOPSIS
     Generate an OAuth2 access token
 .PARAMETER ID
-    The API client ID to authenticate your API requests
+    The API client identifier to authenticate your API requests
 .PARAMETER SECRET
     The API client secret to authenticate your API requests
 .PARAMETER CID

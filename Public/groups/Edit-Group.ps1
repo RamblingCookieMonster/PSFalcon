@@ -1,11 +1,11 @@
 function Edit-Group {
 <#
 .SYNOPSIS
-    Update Host Groups by specifying the ID of the group and details to update
+    Update Host Groups by specifying the group identifier and details to update
 .DESCRIPTION
     Requires host-group:write
 .PARAMETER ID
-    The existing host group id
+    The existing host group identifier
 .PARAMETER NAME
     Host group name
 .PARAMETER DESCRIPTION

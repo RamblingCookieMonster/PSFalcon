@@ -17,13 +17,17 @@ function Split-Array {
         [array] $Id
     )
     process {
-        # Character length of longest value in the array
-        $LargestId = ($Id | Measure-Object -Maximum -Property Length).Maximum
+        if ($Id.count -gt 1) {
+            # Character length of longest value in the array
+            $LargestId = ($Id | Measure-Object -Maximum -Property Length).Maximum
 
-        # Maximum number of ids
-        $MaxIds = [Math]::Floor([decimal](((65535 - ($Falcon.host + $Uri).length)/$LargestId)/1))
+            # Maximum number of ids
+            $MaxIds = [Math]::Floor([decimal](((65535 - ($Falcon.host + $Uri).length)/$LargestId)/1))
 
-        # Output smaller groups
-        for ($i = 0; $i -lt $Id.count; $i += $MaxIds) { ,@($Id)[$i..($i + ($MaxIds - 1))] }
+            # Output smaller groups
+            for ($i = 0; $i -lt $Id.count; $i += $MaxIds) { ,@($Id)[$i..($i + ($MaxIds - 1))] }
+        } else {
+            $Id
+        }
     }
 }

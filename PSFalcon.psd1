@@ -108,6 +108,7 @@ FunctionsToExport = @(
     # iocs
     'Edit-IOC',
     'Get-IOC',
+    'Get-Process',
     'New-IOC',
     'Remove-IOC',
 

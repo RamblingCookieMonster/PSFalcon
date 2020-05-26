@@ -1,11 +1,11 @@
 function Remove-Report {
 <#
 .SYNOPSIS
-    Delete a set of sandbox reports by specifying their IDs
+    Delete a set of sandbox reports by specifying their identifiers
 .DESCRIPTION
     Requires falconx-sandbox:write
 .PARAMETER ID
-    The sandbox report IDs to delete
+    The sandbox report identifiers to delete
 .EXAMPLE
     PS> Remove-CsReport -Id report_id_1, report_id_2
     Removes sandbox reports 'report_id_1' and 'report_id_2'

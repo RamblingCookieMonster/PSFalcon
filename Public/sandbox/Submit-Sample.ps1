@@ -90,15 +90,15 @@ function Submit-Sample {
         }
         $Submission = @{ environment_id = $EnvId }
 
-        switch ($PSBoundKeys.Parameters) {
+        switch ($PSBoundParameters.Keys) {
             'Hash' { $Submission['sha256'] = $Hash }
             'Url' { $Submission['url'] = $Url }
             'Name' { $Submission['submit_name'] = $Name }
             'Script' { $Submission['action_script'] = $Script }
             'Password' { $Submission['command_line'] = $Command }
             'TOR' { $Submission['enable_tor'] = $TOR }
-            'Date' { $Submission['system_date'] = $Hash }
-            'Time' { $Submission['system_time'] = $Hash }
+            'Date' { $Submission['system_date'] = $Date }
+            'Time' { $Submission['system_time'] = $Time }
             'Tag' { $Body['user_tags'] = $Tag }
         }
         $Body.sandbox += $Submission

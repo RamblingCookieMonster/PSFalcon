@@ -5,7 +5,7 @@ function Receive-Artifact {
 .DESCRIPTION
     Requires falconx-sandbox:read
 .PARAMETER ID
-    ID of an artifact, such as an IOC pack, PCAP file, or actor image
+    The identifier of an IOC pack, PCAP file, or actor image
 .PARAMETER PATH
     Destination path
 .PARAMETER NAME
