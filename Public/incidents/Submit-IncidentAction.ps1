@@ -5,7 +5,7 @@ function Submit-IncidentAction {
 .DESCRIPTION
     Requires incidents:write
 .PARAMETER ID
-    The incident ids to target
+    The incident identifiers to target
 .PARAMETER ACTION
     add_tag            : Adds one or more tag values
     delete_tag         : Deletes one or more tag values

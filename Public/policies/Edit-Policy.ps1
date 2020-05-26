@@ -1,7 +1,7 @@
 function Edit-Policy {
 <#
 .SYNOPSIS
-    Update policies by specifying the type and id of the policy
+    Update policies by specifying the policy type and identifier
 .DESCRIPTION
     Requires the following, based on type:
 

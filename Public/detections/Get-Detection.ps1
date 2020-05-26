@@ -43,7 +43,7 @@ function Get-Detection {
             if ($_.count -le 1000) {
                 $true
             } else {
-                throw 'Maximum of 1,000 ids per request.'
+                throw 'Maximum of 1,000 identifiers per request.'
             }
         })]
         [array] $Id,
