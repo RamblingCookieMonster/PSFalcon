@@ -1,11 +1,11 @@
-function Get-Host {
+function Get-Report {
 <#
 .SYNOPSIS
-    Search for hosts in your environment
+    Search for sandbox reports in your environment
 .DESCRIPTION
-    Requires hosts:read
+    Requires falconx-sandbox:read
 .PARAMETER ID
-    Retrieve detailed information for specific host identifiers
+    Retrieve detailed information for specific sandbox report identifiers
 .PARAMETER FILTER
     An FQL filter expression used to limit results
 .PARAMETER LIMIT
@@ -13,87 +13,73 @@ function Get-Host {
 .PARAMETER SORT
     A property to use to sort results
 .PARAMETER OFFSET
-    Offset token/integer to retrieve next result set
-.PARAMETER HIDDEN
-    Narrow search to 'hidden' hosts
+    Offset integer to retrieve next result set
 .PARAMETER DETAILED
     Retrieve detailed information
 .PARAMETER ALL
     Repeat requests until all available results are retrieved
 .EXAMPLE
-    PS> Get-CsHost
-    Returns an unfiltered list of host identifiers
+    PS> Get-CsReport
+    Returns an unfiltered list of sandbox report identifiers
 .EXAMPLE
-    PS> Get-CsHost -Detailed
-    Returns an unfiltered list of detailed host information
+    PS> Get-CsReport -Detailed
+    Returns an unfiltered list of detailed sandbox report information
 .EXAMPLE
-    PS> Get-CsHost -Filter "hostname:'USER-PC'"
-    Returns identifiers for hosts with hostname 'USER-PC'
+    PS> Get-CsReport -Filter 
+    Returns identifiers for sandbox reports with
 .EXAMPLE
-    PS> Get-CsHost -Id host_id_1, host_id_2
-    Returns detail about host identifiers 'host_id_1' and 'host_id_2'
+    PS> Get-CsReport -Id report_id_1, report_id_2
+    Returns detail about sandbox report identifiers 'report_id_1' and 'report_id_2'
 #>
-    [CmdletBinding(DefaultParameterSetName = 'default')]
+    [CmdletBinding(DefaultParameterSetName='default')]
     [OutputType()]
     param(
         [Parameter(ParameterSetName = 'id', Mandatory = $true)]
         [array] $Id,
 
         [Parameter(ParameterSetName = 'default')]
-        [Parameter(ParameterSetName = 'hidden')]
         [string] $Filter,
 
         [Parameter(ParameterSetName = 'default')]
-        [Parameter(ParameterSetName = 'hidden')]
         [ValidateRange(1, 5000)]
         [int] $Limit,
 
         [Parameter(ParameterSetName = 'default')]
-        [Parameter(ParameterSetName = 'hidden')]
         [string] $Sort,
 
         [Parameter(ParameterSetName = 'default')]
-        [Parameter(ParameterSetName = 'hidden')]
         [string] $Offset,
 
-        [Parameter(ParameterSetName = 'hidden')]
-        [switch] $Hidden,
-
         [Parameter(ParameterSetName = 'default')]
-        [Parameter(ParameterSetName = 'hidden')]
         [switch] $Detailed,
 
         [Parameter(ParameterSetName = 'default')]
-        [Parameter(ParameterSetName = 'hidden')]
         [switch] $All
     )
     process {
         $LoopParam = @{ }
 
         $Param = @{
-            Uri    = '/devices/queries/devices-scroll/v1?'
+            Uri    = '/falconx/queries/reports/v1?'
             Method = 'get'
             Header = @{ 'content-type' = 'application/json' }
         }
         switch ($PSBoundParameters.Keys) {
-            'Hidden' {
-                $Param.Uri = '/devices/queries/devices-hidden/v1?'
-                $LoopParam['Hidden'] = $true
-            }
             'Filter' {
                 $Param.Uri += '&filter=' + $Filter
                 $LoopParam['Filter'] = $Filter
             }
+            'Offset' {
+                $Param.Uri += '&offset=' + $Offset
+                $LoopParam['Offset'] = $Offset
+            }
             'Limit' {
-                $Param.Uri += '&limit=' + [string] $Limit
+                $Param.Uri += '&limit=' + $Limit
                 $LoopParam['Limit'] = $Limit
             }
             'Sort' {
                 $Param.Uri += '&sort=' + $Sort
                 $LoopParam['Sort'] = $Sort
-            }
-            'Offset' {
-                $Param.Uri += '&offset=' + [string] $Offset
             }
             'Verbose' {
                 $Param['Verbose'] = $true
@@ -112,7 +98,7 @@ function Get-Host {
             }
         } elseif ($Id) {
             Split-Array -Uri $Param.Uri -Id $Id | ForEach-Object {
-                $Param.Uri = '/devices/entities/devices/v1?ids=' + ($_ -join '&ids=')
+                $Param.Uri = '/falconx/entities/report-summaries/v1?ids=' + ($_ -join '&ids=')
 
                 Invoke-Api @Param
             }
@@ -121,7 +107,7 @@ function Get-Host {
 
             if ($Detailed -and $Request.resources) {
                 Split-Array -Uri $Param.Uri -Id $Request.resources | ForEach-Object {
-                    $Param.Uri = '/devices/entities/devices/v1?ids=' + ($_ -join '&ids=')
+                    $Param.Uri = '/falconx/entities/report-summaries/v1?ids=' + ($_ -join '&ids=')
 
                     Invoke-Api @Param
                 }

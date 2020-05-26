@@ -126,6 +126,14 @@ FunctionsToExport = @(
     'Set-PolicyPrecedence',
     'Submit-PolicyAction',
 
+    # sandbox
+    'Get-Report',
+    'Get-Submission',
+    'Receive-Artifact',
+    'Remove-Report',
+    'Send-Sample',
+    'Submit-Sample',
+
     # spotlight
     'Get-Vulnerability',
 

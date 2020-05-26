@@ -1,24 +1,24 @@
-function Remove-Group {
+function Remove-Report {
 <#
 .SYNOPSIS
-    Delete a set of Host Groups by specifying their IDs
+    Delete a set of sandbox reports by specifying their IDs
 .DESCRIPTION
-    Requires host-group:write
+    Requires falconx-sandbox:write
 .PARAMETER ID
-    The host group ids to delete
+    The sandbox report IDs to delete
 .EXAMPLE
-    PS> Remove-Group -Id group_id_1, group_id_2
-    Removes host groups 'group_id_1' and 'group_id_2'
+    PS> Remove-CsReport -Id report_id_1, report_id_2
+    Removes sandbox reports 'report_id_1' and 'report_id_2'
 #>
-    [CmdletBinding(DefaultParameterSetName = 'default')]
+    [CmdletBinding(DefaultParameterSetName='default')]
     [OutputType()]
     param(
         [Parameter(ParameterSetName = 'default', Mandatory = $true)]
-        [array] $Id
+        [string] $Id
     )
     process {
         $Param = @{
-            Uri    = '/devices/entities/host-groups/v1?ids=' + ($Id -join '&ids=')
+            Uri    = '/falconx/entities/reports/v1?ids=' + ($Id -join '&ids=')
             Method = 'delete'
             Header = @{ 'content-type' = 'application/json' }
         }
