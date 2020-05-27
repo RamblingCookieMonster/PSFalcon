@@ -82,7 +82,7 @@ function Get-Indicator {
         }
         switch ($PSBoundParameters.Keys) {
             'Filter' {
-                $Param.Uri += '&filter=' +  [System.Web.HTTPUtility]::UrlEncode($Filter)
+                $Param.Uri += '&filter=' + [System.Web.HTTPUtility]::UrlEncode($Filter)
                 $LoopParam['Filter'] = $Filter
             }
             'Query' {

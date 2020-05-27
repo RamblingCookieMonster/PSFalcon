@@ -103,7 +103,7 @@ function Get-Policy {
         }
         switch ($PSBoundParameters.Keys) {
             'Filter' {
-                $Param.Uri += '&filter=' +  [System.Web.HTTPUtility]::UrlEncode($Filter)
+                $Param.Uri += '&filter=' + [System.Web.HTTPUtility]::UrlEncode($Filter)
                 $LoopParam['Filter'] = $Filter
             }
             'Limit' {

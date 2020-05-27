@@ -88,7 +88,7 @@ function Get-Detection {
                 $Param['Body'] = @{ ids = @( $Id ) } | ConvertTo-Json
             }
             'Filter' {
-                $Param.Uri += '&filter=' +  [System.Web.HTTPUtility]::UrlEncode($Filter)
+                $Param.Uri += '&filter=' + [System.Web.HTTPUtility]::UrlEncode($Filter)
                 $LoopParam['Filter'] = $Filter
             }
             'Limit' {

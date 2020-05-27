@@ -57,7 +57,7 @@ function Get-Installer {
             'Offset' { $Param.Uri += '&offset=' + $Offset }
             'Limit' { $Param.Uri += '&limit=' + $Limit }
             'Sort' { $Param.Uri += '&sort=' + $Sort }
-            'Filter' { $Param.Uri += '&filter=' +  [System.Web.HTTPUtility]::UrlEncode($Filter) }
+            'Filter' { $Param.Uri += '&filter=' + [System.Web.HTTPUtility]::UrlEncode($Filter) }
             'Verbose' { $Param['Verbose'] = $true }
             'Debug' { $Param['Debug'] = $true }
         }
