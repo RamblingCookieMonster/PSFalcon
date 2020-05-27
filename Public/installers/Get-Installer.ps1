@@ -1,7 +1,7 @@
 function Get-Installer {
 <#
 .SYNOPSIS
-    Search for sensor installer files available in your environment
+    Search for sensor installer packages
 .DESCRIPTION
     Requires sensor-installers:read
 .PARAMETER ID
@@ -17,7 +17,11 @@ function Get-Installer {
 .PARAMETER DETAILED
     Retrieve detailed information
 .EXAMPLE
-    PS> Get-CsInstaller 
+    PS> Get-CsInstaller
+    Lists all available sensor installer packages
+.EXAMPLE
+    PS> Get-CsInstaller -Filter "platform:'windows'"
+    Lists all available sensor installer packages for Windows
 #>
     [CmdletBinding(DefaultParameterSetName='default')]
     [OutputType()]
@@ -53,7 +57,7 @@ function Get-Installer {
             'Offset' { $Param.Uri += '&offset=' + $Offset }
             'Limit' { $Param.Uri += '&limit=' + $Limit }
             'Sort' { $Param.Uri += '&sort=' + $Sort }
-            'Filter' { $Param.Uri += '&filter=' + $Filter }
+            'Filter' { $Param.Uri += '&filter=' +  [System.Web.HTTPUtility]::UrlEncode($Filter) }
             'Verbose' { $Param['Verbose'] = $true }
             'Debug' { $Param['Debug'] = $true }
         }

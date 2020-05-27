@@ -3,12 +3,8 @@ function Get-Policy {
 .SYNOPSIS
     Search for policies in your environment
 .DESCRIPTION
-    Requires the following, based on type:
-
-    device-control-policies:read
-    firewall-management:read
-    prevention-policies:read
-    sensor-update-policies:read
+    Requires the following, based on type: device-control-policies:read, firewall-management:read,
+    prevention-policies:read, sensor-update-policies:read
 .PARAMETER TYPE
     Type of policy
 .PARAMETER ID
@@ -93,9 +89,7 @@ function Get-Policy {
         }
     }
     process {
-        $LoopParam = @{
-            Type = $Type
-        }
+        $LoopParam = @{ Type = $Type }
         $Param = @{
             Uri    = $QueryUri
             Method = 'get'
@@ -104,13 +98,12 @@ function Get-Policy {
             }
         }
         if ($Detailed) {
-            $LoopParam['Detailed'] = $true
-
             $Param.Uri = $CombinedUri
+            $LoopParam['Detailed'] = $true
         }
         switch ($PSBoundParameters.Keys) {
             'Filter' {
-                $Param.Uri += '&filter=' + $Filter
+                $Param.Uri += '&filter=' +  [System.Web.HTTPUtility]::UrlEncode($Filter)
                 $LoopParam['Filter'] = $Filter
             }
             'Limit' {
@@ -121,9 +114,7 @@ function Get-Policy {
                 $Param.Uri += '&sort=' + $Sort
                 $LoopParam['Sort'] = $Sort
             }
-            'Offset' {
-                $Param.Uri += '&offset=' + [string] $Offset
-            }
+            'Offset' { $Param.Uri += '&offset=' + [string] $Offset }
             'Verbose' {
                 $Param['Verbose'] = $true
                 $LoopParam['Verbose'] = $true

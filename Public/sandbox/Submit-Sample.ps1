@@ -27,7 +27,8 @@ function Submit-Sample {
 .PARAMETER TAG
     Searchable tag values to append to the resulting sandbox report
 .EXAMPLE
-    PS> Submit-CsSample
+    PS> Submit-CsSample -Environment Win10_x64 -Hash sha256_hash -Name 'Example'
+    Submits 'sha256_hash' for analysis as 'Example' in a Windows 10 64-bit environment
 #>
     [CmdletBinding(DefaultParameterSetName='default')]
     [OutputType()]

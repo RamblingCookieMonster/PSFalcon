@@ -7,7 +7,7 @@ function Remove-Group {
 .PARAMETER ID
     The host group identifiers to delete
 .EXAMPLE
-    PS> Remove-Group -Id group_id_1, group_id_2
+    PS> Remove-CsGroup -Id group_id_1, group_id_2
     Removes host groups 'group_id_1' and 'group_id_2'
 #>
     [CmdletBinding(DefaultParameterSetName = 'default')]

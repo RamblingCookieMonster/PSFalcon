@@ -3,12 +3,8 @@ function Get-PolicyMember {
 .SYNOPSIS
     Search for policy members in your environment
 .DESCRIPTION
-    Requires the following, based on type:
-
-    device-control-policies:read
-    firewall-management:read
-    prevention-policies:read
-    sensor-update-policies:read
+    Requires the following, based on type: device-control-policies:read, firewall-management:read,
+    prevention-policies:read, sensor-update-policies:read
 .PARAMETER TYPE
     Type of policy
 .PARAMETER ID
@@ -104,7 +100,7 @@ function Get-PolicyMember {
         }
         switch ($PSBoundParameters.Keys) {
             'Filter' {
-                $Param.Uri += '&filter=' + $Filter
+                $Param.Uri += '&filter=' +  [System.Web.HTTPUtility]::UrlEncode($Filter)
                 $LoopParam['Filter'] = $Filter
             }
             'Limit' {

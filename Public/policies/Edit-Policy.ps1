@@ -3,12 +3,8 @@ function Edit-Policy {
 .SYNOPSIS
     Update policies by specifying the policy type and identifier
 .DESCRIPTION
-    Requires the following, based on type:
-
-    device-control-policies:write
-    firewall-management:write
-    prevention-policies:write
-    sensor-update-policies:write
+    Requires the following, based on type: device-control-policies:write, firewall-management:write,
+    prevention-policies:write, sensor-update-policies:write
 .PARAMETER TYPE
     Type of policy
 .PARAMETER ID

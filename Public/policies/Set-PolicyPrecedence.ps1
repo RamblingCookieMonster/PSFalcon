@@ -3,12 +3,8 @@ function Set-PolicyPrecedence {
 .SYNOPSIS
     Sets the precedence of policies based on identifiers, ordered highest to lowest
 .DESCRIPTION
-    Requires the following, based on type:
-
-    device-control-policies:write
-    firewall-management:write
-    prevention-policies:write
-    sensor-update-policies:write
+    Requires the following, based on type: device-control-policies:write, firewall-management:write,
+    prevention-policies:write, sensor-update-policies:write
 .PARAMETER TYPE
     Type of policy
 .PARAMETER PLATFORM

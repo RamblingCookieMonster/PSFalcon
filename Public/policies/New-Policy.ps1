@@ -3,12 +3,8 @@ function New-Policy {
 .SYNOPSIS
     Create Prevention Policies by specifying details about the policy to create
 .DESCRIPTION
-    Requires the following, based on type:
-
-    device-control-policies:write
-    firewall-management:write
-    prevention-policies:write
-    sensor-update-policies:write
+    Requires the following, based on type: device-control-policies:write, firewall-management:write,
+    prevention-policies:write, sensor-update-policies:write
 .PARAMETER TYPE
     Type of policy
 .PARAMETER CLONEID
