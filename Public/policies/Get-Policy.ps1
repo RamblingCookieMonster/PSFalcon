@@ -127,7 +127,7 @@ function Get-Policy {
         if ($All) {
             Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam
         } elseif ($Id) {
-            Split-Array -Uri $Param.Uri -Id $Id | ForEach-Object {
+            Split-Array -Uri $EntityUri -Join '&ids=' -Id $Id | ForEach-Object {
                 $Param.Uri = $EntityUri + ($_ -join '&ids=')
 
                 Invoke-Api @Param

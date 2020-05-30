@@ -46,8 +46,10 @@ function Get-Role {
             $Request = Invoke-Api @Param
 
             if ($Detailed -and $Request.resources) {
-                Split-Array -Uri $Param.Uri -Id $Request.resources | ForEach-Object {
-                    $Param.Uri = '/user-roles/entities/user-roles/v1?ids=' + ($_ -join '&ids=')
+                $Uri = '/user-roles/entities/user-roles/v1?ids='
+
+                Split-Array -Uri $Uri -Join '&ids=' -Id $Request.resources | ForEach-Object {
+                    $Param.Uri = $Uri + ($_ -join '&ids=')
 
                     Invoke-Api @Param
                 }

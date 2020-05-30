@@ -97,8 +97,10 @@ function Get-Submission {
                 Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam
             }
         } elseif ($Id) {
-            Split-Array -Uri $Param.Uri -Id $Id | ForEach-Object {
-                $Param.Uri = '/falconx/entities/submissions/v1?ids=' + ($_ -join '&ids=')
+            $Uri = '/falconx/entities/submissions/v1?ids='
+
+            Split-Array -Uri $Uri -Join '&ids=' -Id $Id | ForEach-Object {
+                $Param.Uri = $Uri + ($_ -join '&ids=')
 
                 Invoke-Api @Param
             }
@@ -106,8 +108,10 @@ function Get-Submission {
             $Request = Invoke-Api @Param
 
             if ($Detailed -and $Request.resources) {
-                Split-Array -Uri $Param.Uri -Id $Request.resources | ForEach-Object {
-                    $Param.Uri = '/falconx/entities/submissions/v1?ids=' + ($_ -join '&ids=')
+                $Uri = '/falconx/entities/submissions/v1?ids='
+
+                Split-Array -Uri $Uri -Join '&ids=' -Id $Request.resources | ForEach-Object {
+                    $Param.Uri = $Uri + ($_ -join '&ids=')
 
                     Invoke-Api @Param
                 }

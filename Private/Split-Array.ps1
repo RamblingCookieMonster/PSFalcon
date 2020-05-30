@@ -4,14 +4,19 @@ function Split-Array {
     Splits large 'id' arrays into smaller groups
 .PARAMETER URI
     Destination Uri, used to find maximum string length for Invoke-WebRequest Uri parameter
+.PARAMETER JOIN
+    String that is used to join fields; used in maximum length calculation
 .PARAMETER ID
     Array of 'id' values
 #>
-[CmdletBinding(DefaultParameterSetName = 'default')]
+    [CmdletBinding(DefaultParameterSetName = 'default')]
     [OutputType()]
     param(
         [Parameter(ParameterSetName = 'default', Mandatory = $true)]
         [string] $Uri,
+
+        [Parameter(ParameterSetName = 'default', Mandatory = $true)]
+        [string] $Join,
 
         [Parameter(ParameterSetName = 'default', Mandatory = $true)]
         [array] $Id
@@ -21,11 +26,12 @@ function Split-Array {
             # Character length of longest value in the array
             $LargestId = ($Id | Measure-Object -Maximum -Property Length).Maximum
 
-            # Maximum number of ids
-            $MaxIds = [Math]::Floor([decimal](((65535 - ($Falcon.host + $Uri).length)/$LargestId)/1))
+            # Maximum number of ids, based on full uri length plus join string
+            $MaxIds = [Math]::Floor([decimal](((65535 - ($Falcon.host + $Uri).length)/($LargestId +
+            ($Join).length))/1))
 
             # Output smaller groups
-            for ($i = 0; $i -lt $Id.count; $i += $MaxIds) { ,@($Id)[$i..($i + ($MaxIds - 1))] }
+            for ($i = 0; $i -lt $Id.count; $i += $MaxIds) { ,($Id[$i..($i + ($MaxIds - 1))]) }
         } else {
             $Id
         }

@@ -29,12 +29,10 @@ function Format-Response {
             $Output.PSObject.Properties.Add((New-Object PSNoteProperty('status',(
             [string] $Request.StatusCode + ' ' + $Request.StatusDescription))))
         }
-        $Json = if ($Request.Content) {
-            # Convert successful result from Json
-            ConvertFrom-Json -InputObject $Request.Content
-        } elseif ($Request.Message) {
-            # Convert error from Json
-            ConvertFrom-Json -InputObject $Request.Message
+        $Json = try {
+            $Request | ConvertFrom-Json
+        } catch {
+            Write-Output $_
         }
         [array] $Default = if ($Json) {
             ($Json | Get-Member -MemberType NoteProperty).Name | ForEach-Object {

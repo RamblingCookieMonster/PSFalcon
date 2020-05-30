@@ -62,8 +62,10 @@ function Get-Installer {
             'Debug' { $Param['Debug'] = $true }
         }
         if ($Id) {
-            Split-Array -Uri $Param.Uri -Id $Id | ForEach-Object {
-                $Param.Uri = '/sensors/entities/installers/v1?ids=' + ($_ -join '&ids=')
+            $Uri = '/sensors/entities/installers/v1?ids='
+
+            Split-Array -Uri $Uri -Join '&ids=' -Id $Id | ForEach-Object {
+                $Param.Uri = $Uri + ($_ -join '&ids=')
 
                 Invoke-Api @Param
             }

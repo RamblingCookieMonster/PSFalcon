@@ -130,9 +130,10 @@ function Get-Actor {
         if ($All) {
             Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam
         } elseif ($Id) {
-            Split-Array -Uri $Param.Uri -Id $Id | ForEach-Object {
-                $Param.Uri = '/intel/entities/actors/v1?fields=' + ($Field -join '&fields=') +
-                '&ids=' + ($_ -join '&ids=')
+            $Uri = '/intel/entities/actors/v1?fields=' + ($Field -join '&fields=') + '&ids='
+
+            Split-Array -Uri $Uri -Join '&ids=' -Id $Id | ForEach-Object {
+                $Param.Uri = $Uri + ($_ -join '&ids=')
 
                 Invoke-Api @Param
             }

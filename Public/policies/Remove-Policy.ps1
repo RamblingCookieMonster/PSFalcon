@@ -41,7 +41,7 @@ function Remove-Policy {
             'Verbose' { $Param['Verbose'] = $true }
             'Debug' { $Param['Debug'] = $true }
         }
-        Split-Array -Uri $Param.Uri -Id $Id | ForEach-Object {
+        Split-Array -Uri $EntityUri -Join '&ids=' -Id $Id | ForEach-Object {
             $Param.Uri = $EntityUri + ($_ -join '&ids=')
 
             Invoke-Api @Param

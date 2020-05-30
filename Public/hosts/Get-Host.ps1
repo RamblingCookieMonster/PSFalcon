@@ -111,8 +111,10 @@ function Get-Host {
                 Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam
             }
         } elseif ($Id) {
-            Split-Array -Uri $Param.Uri -Id $Id | ForEach-Object {
-                $Param.Uri = '/devices/entities/devices/v1?ids=' + ($_ -join '&ids=')
+            $Uri = '/devices/entities/devices/v1?ids='
+
+            Split-Array -Uri $Uri -Join '&ids=' -Id $Id | ForEach-Object {
+                $Param.Uri = $Uri + ($_ -join '&ids=')
 
                 Invoke-Api @Param
             }
@@ -120,8 +122,10 @@ function Get-Host {
             $Request = Invoke-Api @Param
 
             if ($Detailed -and $Request.resources) {
-                Split-Array -Uri $Param.Uri -Id $Request.resources | ForEach-Object {
-                    $Param.Uri = '/devices/entities/devices/v1?ids=' + ($_ -join '&ids=')
+                $Uri = '/devices/entities/devices/v1?ids='
+
+                Split-Array -Uri $Uri -Join '&ids=' -Id $Request.resources | ForEach-Object {
+                    $Param.Uri = $Uri + ($_ -join '&ids=')
 
                     Invoke-Api @Param
                 }

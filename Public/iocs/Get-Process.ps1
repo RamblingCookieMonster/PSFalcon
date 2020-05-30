@@ -26,8 +26,10 @@ function Get-Process {
             'Verbose' { $Param['Verbose'] = $true }
             'Debug' { $Param['Debug'] = $true }
         }
-        Split-Array -Uri $Param.Uri -Id $Id | ForEach-Object {
-            $Param.Uri = '/processes/entities/processes/v1?ids=' + ($_ -join '&ids=')
+        $Uri = '/processes/entities/processes/v1?ids='
+
+        Split-Array -Uri $Uri -Join '&ids=' -Id $Id | ForEach-Object {
+            $Param.Uri = $Uri + ($_ -join '&ids=')
 
             Invoke-Api @Param
         }

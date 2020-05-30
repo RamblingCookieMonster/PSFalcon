@@ -99,8 +99,10 @@ function Get-Group {
         if ($All) {
             Invoke-Loop -Command $MyInvocation.MyCommand.Name -Param $LoopParam
         } elseif ($Id) {
-            Split-Array -Uri $Param.Uri -Id $Id | ForEach-Object {
-                $Param.Uri = '/devices/entities/host-groups/v1?ids=' + ($_ -join '&ids=')
+            $Uri = '/devices/entities/host-groups/v1?ids='
+
+            Split-Array -Uri $Uri -Join '&ids=' -Id $Id | ForEach-Object {
+                $Param.Uri = $Uri + ($_ -join '&ids=')
 
                 Invoke-Api @Param
             }
