@@ -41,7 +41,7 @@ function Get-CsFirewallPolicyId {
             }
         }
         switch ($PSBoundParameters.Keys) {
-            'Filter' { $Param.Uri += '&filter=' + $Filter.ToLower() }
+            'Filter' { $Param.Uri += '&filter=' + $Filter }
             'Verbose' { $Param['Verbose'] = $true }
             'Debug' { $Param['Debug'] = $true }
         }

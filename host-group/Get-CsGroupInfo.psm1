@@ -52,7 +52,7 @@ function Get-CsGroupInfo {
             }
         }
         switch ($PSBoundParameters.Keys) {
-            'Filter' { $Param.Uri += '&filter=' + $Filter.ToLower() }
+            'Filter' { $Param.Uri += '&filter=' + $Filter }
             'Id' { $Param.Uri = '/devices/entities/host-groups/v1?ids=' }
             'Verbose' { $Param['Verbose'] = $true }
             'Debug' { $Param['Debug'] = $true }
